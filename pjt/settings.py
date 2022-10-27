@@ -36,10 +36,13 @@ INSTALLED_APPS = [
     "articles",
     "accounts",
     "pages",
-    "django.contrib.admin",
-    "django.contrib.auth",
+    "imagekit",
+    "django_bootstrap5",
+    "django_extensions",
+    "django.contrib.admin",  # 관리자
+    "django.contrib.auth",  # 유저/인증
     "django.contrib.contenttypes",
-    "django.contrib.sessions",
+    "django.contrib.sessions",  # 세션 관리
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",  # new
@@ -108,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ko-kr"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -150,4 +153,12 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+
+
+MEDIA_ROOT = BASE_DIR / "images"
+MEDIA_URL = "/media/"
+
+# Message Framework
+# https://docs.djangoproject.com/en/4.1/ref/contrib/messages/
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 

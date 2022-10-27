@@ -1,18 +1,21 @@
 {% extends 'home.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block content %} 
 <h1>{{ article.title }}</h1>
 <p>{{ article.pk }}번 게시글 | <a href="{% url 'accounts:detail' article.user.pk %}">{{ article.user.username }}</a></p>
 <p>{{ article.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ article.updated_at|date:"y-m-d D" }}</p>
-{% if request.user.is_authenticated %}
-  {% if request.user in article.like_users.all %}
-    <i id="like-btn" data-article-id="{{ article.pk }}" class="bi bi-heart-fill"></i>
-  {% else %}
-    <i id="like-btn" data-article-id="{{ article.pk }}" class="bi bi-heart"></i>
+
+<span>
+  {% if request.user.is_authenticated %}
+    <a class="like-heart" href="{% url 'articles:like' article.pk %}">
+    {% if request.user in article.like_users.all %}
+      <i class="bi bi-heart-fill"></i>
+    {% else %}
+      <i class="bi bi-heart"></i>
+    {% endif %}</a>{{ article.like_users.count }}</span>
   {% endif %}
-{% endif %}
-<span id="like-count">{{ article.like_users.count }}</span>
 
 {% if request.user == article.user %}
 <p>
@@ -27,20 +30,20 @@
 <hr>
 <h4 class="my-3">댓글</h4>
 {% if request.user.is_authenticated %}
-<form id="comment-form" data-article-id="{{ article.pk }}">
+<form action="{% url 'articles:comment_create' article.pk %}" method="POST">
   {% csrf_token %}
-  {% bootstrap_form comment_form layout='floating'%}
+  {% bootstrap_form comment_form layout='inline'%}
   {% bootstrap_button button_type="submit" content="OK" %}
 </form>
 {% endif %}
 <hr>
-<div id="comments">
+
 {% for comment in comments %}
   <p> {{ comment.user.username }} | {{ comment.content }}</p>
   <hr>    
 {% empty %}
   <p>댓글이 없어요 ㅠ_ㅠ</p>
 {% endfor %}
-</div>
+
 
 {% endblock %}

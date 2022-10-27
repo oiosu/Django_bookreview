@@ -3,6 +3,7 @@ from imagekit.processors import ResizeToFill
 from imagekit.models import ProcessedImageField
 from django.conf import settings
 
+
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=20)

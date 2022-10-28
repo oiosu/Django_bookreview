@@ -1,17 +1,17 @@
-{% extends 'home.html' %}
+
 {% load static %}
 {% load django_bootstrap5 %}
 
-{% block content %}
-<h1>{{ user.username }}님의 프로필</h1>
-<p>{{ user.email }} | {{ user.full_name }}</p>
-<p>팔로우 : {{ user.followings.count }} | 팔로워 : {{ user.followers.count }}</p>
+<body>
+<h1>{{ user.username }}</h1>
+<p>{{ user.email }}</p>
+<p>following : {{ user.followings.count }} | followers : {{ user.followers.count }}</p>
 {% if request.user != user %}
-<a href="{% url 'accounts:follow' user.pk %}">
+<a class="follow-implement" href="{% url 'accounts:follow' user.pk %}">
     {% if request.user in user.followers.all %}
-        팔로우 취소
+    <i class="text-decoration-none bi bi-backspace-fill">Unfollow!</i>
     {% else %}
-        팔로우
+    <i class="bi bi-check-square-fill">Follow!</i>
     {% endif %}
 </a>
 {% endif %}
@@ -47,4 +47,3 @@
         {% endfor %}
     </div>
 </div>
-{% endblock %}

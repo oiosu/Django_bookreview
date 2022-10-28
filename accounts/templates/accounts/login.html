@@ -1,8 +1,27 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-<!-- templates/account/login.html -->
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+
+<body style="background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/06a77b144457079.628ce354af612.png')">
+
+  <div class="row">
+    <div class="p-5 col-md-7 d-flex flex-column justify-content-center">
+        
+    </div>
+    <div class="p-5 col-md-5">
+      <h3 class="mb-3" style="color:3C2317; font-weight:bolder">Log in!</h3>
+      <form style="color: 3C2317; font-weight:bolder" action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <div class="col-lg-10">
+      {% bootstrap_button button_class="btn btn-outline-warning" button_type="reset" content="Cancel" %}
+      {% bootstrap_button button_class="btn btn-warning" button_type="submit" content="Log in" %}
+      </div>
+    </div>
+    </div>
+  </div>
+</body>

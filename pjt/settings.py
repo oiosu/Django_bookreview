@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "accounts",
     "pages",
     "imagekit",
+    # "sass_processor", #sass
     "django_bootstrap5",
     "django_extensions",
     "django.contrib.admin",  # 관리자
@@ -50,6 +51,16 @@ INSTALLED_APPS = [
     "allauth.account",  # new
     "allauth.socialaccount",  # new
 ]
+
+# SASS_ROOT=os.path.join(BASE_DIR, 'static')
+# SASS_OUTPUT_STYLE = 'compact'
+# SASS_PROCESSOR_ENABLED = True
+# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_FINDERS  = [
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'sass_processor.finders.CssFinder',
+# ]
 
 AUTH_USER_MODEL = "accounts.CustomUser"  # new
 

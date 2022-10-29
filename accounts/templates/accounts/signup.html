@@ -24,13 +24,10 @@
           {% csrf_token %}
           {% bootstrap_form form %}
           <div class="col-lg-10">
-          {% bootstrap_button button_class="btn btn-success" button_type="reset" content="Cancel" %}
-          {% bootstrap_button button_class="btn btn-success" button_type="submit" content="Sign up" %}
+          {% bootstrap_button button_class="btn btn-outline-success" style="font-weight:bold" button_type="reset" content="Cancel" %}
+          {% bootstrap_button button_class="btn btn-success" style="font-weight:bold" button_type="submit" content="Sign up" %}
           
           </div>
       </div>
     </div>
   </div>
-
-  <footer>
-  </footer>

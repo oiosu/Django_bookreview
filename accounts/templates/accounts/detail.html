@@ -1,16 +1,31 @@
-{% load static %}
 {% load django_bootstrap5 %}
+{% load static %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <body>
+<div class='container'>
+ <div style="background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/29e111149039507.62e042179696c.jpg">
+ </div>
+</div>
+
+<div class='profile'>
+
+</div>
+
+<div class="container">
+      <div class="row" style="	background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/29e111149039507.62e042179696c.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;" >
+      </div>
+</div>
 <h1>{{ user.username }}</h1>
 <p>{{ user.email }}</p>
 <p>following : {{ user.followings.count }} | followers : {{ user.followers.count }}</p>
 {% if request.user != user %}
-<a class="follow-implement" href="{% url 'accounts:follow' user.pk %}">
+<a style="text-decoration:none; color:blue;" class="follow-implement" href="{% url 'accounts:follow' user.pk %}">
     {% if request.user in user.followers.all %}
-    <i class="text-decoration-none bi bi-backspace-fill">Unfollow!</i>
+    <i class="bi bi-backspace-fill"> Unfollow!</i>
     {% else %}
-    <i class="bi bi-check-square-fill">Follow!</i>
+    <i class="bi bi-check-square-fill"> Follow!</i>
     {% endif %}
 </a>
 {% endif %}
@@ -46,3 +61,6 @@
         {% endfor %}
     </div>
 </div>
+</div>
+</div>
+</body>

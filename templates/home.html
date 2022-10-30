@@ -22,9 +22,66 @@
   <!-- CSS dependencies -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="wireframe.css">
+  <style>
+    .imageselect .imagebox {
+    position: relative
+}
+
+.imageselect .imagebox figure {
+    position: relative;
+    overflow: hidden
+}
+
+.imageselect .imagebox figcaption {
+    background: rgba(45, 62, 82, 0.9);
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 20px;
+    -webkit-transform: translateY(140%);
+    -moz-transform: translateY(140%);
+    -ms-transform: translateY(140%);
+    -o-transform: translateY(140%);
+    transform: translateY(140%);
+    -moz-transition: -moz-transform 0.5s ease;
+    -o-transition: -o-transform 0.5s ease;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    -ms-transition: -ms-transform 0.5s ease;
+    transition: transform 0.5s ease
+}
+
+.imageselect .imagebox .caption-title {
+    margin-bottom: 0;
+    color: #fff
+}
+
+.imageselect .imagebox .price {
+    color: #fdb714
+}
+
+.imageselect .imagebox:hover figcaption {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0)
+}
+
+.price {
+    color: #f0715f;
+    font-size: 1.6667em;
+    text-transform: uppercase;
+    float: right;
+    text-align: right;
+    line-height: 1;
+    display: block
+}
+  </style>
 </head>
 
-<body >
+<body>
+  <!-- nav & banner -->
   <nav class="navbar navbar-dark bg-primary">
     <div class="container d-flex justify-content-center"> <a class="navbar-brand" href="#">
         <i class="fa d-inline fa-lg fa-circle-o"></i>
@@ -35,21 +92,23 @@
     <div class="container">
       <div class="row" draggable="true">
         <div class="mx-auto p-5 my-5 col-md-8">
-          <h1 style="font-weight:bold" class="isplay-4">BOOK REVIEW</h1>
-          <p class="lead">Read, Write, And Share All of this is right here.<br>Enjoy here without having to go to the library or bookstore!!</p>
+          <h1 style="color: #fdb714; font-weight:bold" class="isplay-4">BOOK REVIEW</h1>
+          <p style="color: #fdb714;" class="lead">Read, Write, And Share All of this is right here.<br>Enjoy here without having to go to the library or bookstore!!</p>
+          <!-- 로그인, 회원가입, 글작성 -->
           <a class="m-3 btn btn-warning" href="{% url 'accounts:login' %}" style="font-weight:bold">LOGIN</a>
           <a class="btn btn btn-warning" href="{% url 'accounts:signup' %}" style="font-weight:bold">SIGN UP</a>
-          <a class="m-3 btn btn-warning" href="#" style="font-weight:bold">REVIEW</a>
+          <a class="m-3 btn btn-warning" href="{% url 'articles:index' %}" style="font-weight:bold">REVIEW</a>
         </div>
       </div>
     </div>
   </div>
+  <!-- 이메일 구간 -->
   <div class="py-5 text-center text-md-right" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/fs/717ad293173209.5e5e42301761a.jpg);	background-position: right bottom;	background-size: cover;	background-repeat: repeat; background-attachment: fixed;">
     <div class="container">
       <div class="row">
         <div class="p-5 mx-auto mx-md-0 ml-md-auto col-10 col-md-9">
-          <h3 class="display-3">I feel the charm</h3>
-          <p class="mb-3 lead">Of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>
+          <h3 class="display-3">BOOK REVIEW SERVICE</h3>
+          <p class="mb-3 lead">By using our service, we can help you to read more abundantly. If you have any problems while using our services, please send us your e-mail! have a good day!</p>
           <form class="form-inline d-flex justify-content-end">
             <div class="input-group"> <input type="email" class="form-control" placeholder="Your email" id="formcover1">
               <div class="input-group-append"> <button class="btn btn-primary" type="button">Subscribe</button> </div>
@@ -59,7 +118,8 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="">
+  <!-- 빌게이츠_책을 읽어야하는 이유 -->
+  <div class="py-5" >
     <div class="container">
       <div class="row">
         <div class="col-md-8">
@@ -71,7 +131,9 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4"><img style="width:250px" class="img-fluid d-block rounded-circle" src="https://file.mk.co.kr/meet/neds/2017/05/image_readtop_2017_327413_14949311292883833.jpg"></div>
+        <div class="col-md-4">
+          <img style="width:250px" class="img-fluid d-block rounded-circle" src="https://file.mk.co.kr/meet/neds/2017/05/image_readtop_2017_327413_14949311292883833.jpg">
+        </div>
       </div>
     </div>
   </div>
@@ -81,58 +143,195 @@
       </div>
     </div>
   </div>
+  <!-- 책 소개 -->
   <div class="text-center">
     <div class="container-fluid">
       <div class="row px-2 m-3">
         <div class="col mx-2 pt-5 px-5 mb-3" style="background-color:#7EB5A6;">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954673105.jpg" width="">
+          <h2 style="color: #fff;" class="mt-3"><b>나는 이 여름, 그런 당신의 분투에 나의 소설들이 조금이나마 힘이 되어줄 수 있기를 간절한 마음으로 바라고있다.</b></h2>
+          <p class="lead mb-5">백수린 소설</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000000780660"><img style="width: 400px;" src="https://contents.kyobobook.co.kr/pdt/9788954673105.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">여름의 빌라</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
-        <div class="col mx-2 pt-5 px-5 bg-primary mb-3">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" width="" src="https://contents.kyobobook.co.kr/pdt/4808960907348.jpg">
+        <div class="col mx-2 pt-5 px-5 mb-3" style="background-color: #905E96;">
+          <h2 style="color: #fff;" class="mt-3"><b>지금 이 순간 내 삶을 긍정하라! 아무것도 하지 않기엔 나의 오늘은 너무 소중하다!</b></h2>
+          <p class="lead mb-5">브리애나 위스트</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000000780660">
+                                  <img style=" width: 400px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162543023.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">내 최고의 하루는 오늘부터 시작된다</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
       </div>
       <div class="row px-2 m-3">
-        <div class="col mx-2 pt-5 px-5 mb-3 bg-light">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" src="https://contents.kyobobook.co.kr/pdt/9791161571188.jpg" width="">
+        <div class="col mx-2 pt-5 px-5 mb-3" style="background-color: #F7CCAC;">
+          <h2 style="color: #fff;" class="mt-3"><b>"강은 빠지는 곳이 아니라 건너가는 곳임을. 다리는 건너는 곳이지 뛰어내리는 곳이 아님을."</b></h2>
+          <p class="lead mb-5">김호연 장편소설</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000061425721">
+                                  <img style=" width: 450px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791161571331.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">불편한 편의점</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
         <div class="col mx-2 pt-5 px-5 mb-3 bg-secondary">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" width="" src="https://contents.kyobobook.co.kr/pdt/450D000200688.jpg">
+          <h2 style="color: #fff;" class="mt-3"><b>삶을 원하거든 죽음을 준비하라! 범의학자의 예리한 시선과 인문학적 통찰로 풀어낸 죽음 지침서</b></h2>
+          <p class="lead mb-5">유성호 저자</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000061425721">
+                                  <img style=" width: 450px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788950979409.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">나는 매주 시체를 보러간다</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
       </div>
       <div class="row px-2 m-3">
         <div class="col mx-2 pt-5 px-5 mb-3 bg-info">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954640718.jpg" width="">
+          <h2 style="color: #fff;" class="mt-3"><b>너는 하얗게 웃었지. 가령 이렇게 쓰면 너는 조용히 견디며 웃으려 애썼던 어떤 사람이다</b></h2>
+          <p class="lead mb-5">한강 소설</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000061425721">
+                                  <img style=" width: 450px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954651134.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">흰</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
-        <div class="col mx-2 pt-5 px-5 mb-3 bg-primary">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791197037153.jpg" width="">
+        <div class="col mx-2 pt-5 px-5 mb-3" style="background-color: #FFB4B4;">
+          <h2 style="color: #fff;" class="mt-3"><b>사랑을 가득 품은 너처럼 꿋꿋하게 견뎌온 너처럼 <br> 작은 별이지만 빛나고 있어</br></h2>
+          <p class="lead mb-5">소윤 에세이</p>
+          <br>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000000780090">
+                                  <img style=" width: 450px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791197037153.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">작은 별이지만 빛나고 있어</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
       </div>
       <div class="row px-2 m-3">
-        <div class="col mx-2 pt-5 px-5 mb-3 bg-light">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791158741693.jpg" width="">
+        <div style="background-color: #FFD372;" class="col mx-2 pt-5 px-5 mb-3">
+          <h2 style="color: #fff;" class="mt-3"><b>다른 사람과 발맞추려 애쓰지 말고 차분하게 당신의 인생을 걸어가라</b></h2>
+          <p class="lead mb-5">방황하지 않고 나만의 리듬으로 살아가기</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000200061325">
+                                  <img style=" width: 450px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791158741693.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title"> 조금 서툴더라도 네 인생을 응원해 </h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
-        <div class="col mx-2 pt-5 px-5 mb-3 bg-light">
-          <h2 class="mt-3"><b>Another headline</b></h2>
-          <p class="lead mb-5">And an even wittier subheading.</p>
-          <img class="img-fluid d-block" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791188469994.jpg" width="">
+        <div class="col mx-2 pt-5 px-5 mb-3" style="background-color: #C74B50;">
+          <h2 style="color: #fff;" class="mt-3"><b>"마지막으로 딱 한 번만 그 사람을 만나게해주세요"</b></h2>
+          <p class="lead mb-5">무라세 다케시</p>
+          <section id="content">
+            <div class="container">
+                <div id="main">
+                    <div class="imageselect row add-clearfix image-imagebox">
+                        <!-- <div class="col-sm-6"> -->
+                            <article class="imagebox">
+                                <figure> <a href="https://product.kyobobook.co.kr/detail/S000061353833">
+                                  <img style=" width: 450px;" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191043754.jpg" alt=""></a>
+                                    <figcaption> <span class="price">@ 5,234</span>
+                                        <h2 class="caption-title">세상의 마지막 기차역</h2>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
         </div>
       </div>
       <div class="row m-3">
-        <div class="col-md-6" style="">
+        <div class="col-md-6" >
           <div class="card"> <img class="card-img-top" src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/b90d02143527491.62a9cdfc2af69.jpg" alt="Card image cap">
             <div class="card-body">
               <h4 class="card-title">Guideline</h4>
@@ -140,11 +339,9 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6" style="">
-          <div class="card">
-            <div class="card-body">
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+        <div class="col-md-6">
+          <di class="card">
+            <di class="card-body"></di>
             <img class="card-img-bottom" src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/8d225c143527491.629763bcf14cd.jpg" alt="Card image cap">
           </div>
         </div>

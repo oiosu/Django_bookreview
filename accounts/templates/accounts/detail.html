@@ -2,65 +2,51 @@
 {% load static %}
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-<body>
-<div class='container'>
- <div style="background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/29e111149039507.62e042179696c.jpg">
- </div>
-</div>
-
-<div class='profile'>
-
-</div>
-
-<div class="container">
-      <div class="row" style="	background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/29e111149039507.62e042179696c.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;" >
+<body class="py-5 text-center parallax cover gradient-overlay" style="background-image: url(&quot;https://mir-s3-cdn-cf.behance.net/project_modules/1400/29e111149039507.62e042179696c.jpg&quot;); position: relative; background-position: 50% calc(50% + 50.6px); background-size: cover;">
+<a href='/' style='font-weight:bold' type="button" class="btn btn-warning">🏠HOME</a>
+    <div class="container d-flex flex-column" >
+      <div class="row my-auto">
+        <div class="row col-12 justify-content-center mt-3">
+            <div class="card text-center" style="width: 25rem;">
+                <div class="card-body">
+                    <h2 class="card-title">{{ user.username }}'s Profile</h5>
+                    <p class="card-text">{{ user.email }}</p>
+                    {% if request.user != user %}
+                    <a style="text-decoration:none; color:blue;" class="follow-implement" href="{% url 'accounts:follow' user.pk %}">
+                        {% if request.user in user.followers.all %}
+                        <i class="bi bi-backspace-fill"> Unfollow!</i>
+                        {% else %}
+                        <i class="bi bi-check-square-fill"> Follow!</i>
+                        {% endif %}
+                    </a>
+                    {% endif %}
+                </div>
+                <div class='follow' style='float:left; margin-top:1rem;'>
+                    <dl>
+                        <dd>
+                            <p style='font-weight:bolder'>following</p>
+                            <span>{{ user.followings.count }}</span>
+                        </dd>
+                        <dd> 
+                            <p style='font-weight:bolder'>follower</p>
+                            <span>{{ user.followers.count }}</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+         </div>
+        </div>
       </div>
-</div>
-<h1>{{ user.username }}</h1>
-<p>{{ user.email }}</p>
-<p>following : {{ user.followings.count }} | followers : {{ user.followers.count }}</p>
-{% if request.user != user %}
-<a style="text-decoration:none; color:blue;" class="follow-implement" href="{% url 'accounts:follow' user.pk %}">
-    {% if request.user in user.followers.all %}
-    <i class="bi bi-backspace-fill"> Unfollow!</i>
-    {% else %}
-    <i class="bi bi-check-square-fill"> Follow!</i>
-    {% endif %}
-</a>
-{% endif %}
-<div class="row">
-    <div class="col-6">
-        <h3>작성한 글</h3>
-        <p class="text-muted">{{ user.article_set.count }}개를 작성하였습니다.</p>
-        {% for article in user.article_set.all %}
-        <p>
-            {{ forloop.counter }}
-            <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
-        </p>
-        {% endfor %}
     </div>
-    <div class="col-6">
-        <h3>작성한 댓글</h3>
-        <p class="text-muted">{{ user.comment_set.count }}개를 작성하였습니다.</p>
-        {% for comment in user.comment_set.all %}
-        <p>
-            {{ forloop.counter }}
-            <a href="{% url 'articles:detail' comment.article_id %}">{{ comment.content }}</a>
-        </p>
-        {% endfor %}
+    <div class="section-overlapping">
+    <div class="container"></div>
     </div>
-    <div class="col-6">
-        <h3>좋아요 누른 글</h3>
-        <p class="text-muted">{{ user.like_articles.count }}개를 작성하였습니다.</p>
-        {% for article in user.like_articles.all %}
-        <p>
-            {{ forloop.counter }}
-            <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
-        </p>
-        {% endfor %}
+    <div>
+    <div class="container">
+        <div class="row"></div>
     </div>
-</div>
-</div>
-</div>
+    </div>
+    </div>
 </body>

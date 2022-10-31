@@ -1,20 +1,87 @@
 {% load django_bootstrap5 %}
 {% load static %}
 
+<!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
+<!DOCTYPE html>
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>REVIEW 작성</title>
+  <meta name="author" content="Pingendo">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="wireframe.css" type="text/css">
+</head>
 
-{% if request.resolver_match.url_name == 'create' %}
-<h1> 글쓰기 </h1>
-{% else %}
-<h1> 수정하기 </h1>
-{% endif %}
+{% comment %} nav bar {% endcomment %}
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container d-flex justify-content-center">
+    <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-circle-o"></i>
+        <b>Comfortable Books And Articles</b>
+    </a>
+  </div>
+</nav>  
 
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {% bootstrap_form article_form %}
-  {% bootstrap_button button_type="submit" content="OK" %}
-</form>
+<div class='container'>
+
+  <div>
+    {% block content %}
+    {% if request.resolver_match.url_name == 'create' %}
+    <h1 class='mt-3'> WRITE A REVIEW </h1>
+    {% else %}
+    <h1 class='mt-3'> EDIT </h1>
+    {% endif %}
+  </div>
+
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form article_form %}
+    {% bootstrap_button style='float:right' button_type="submit" content="SAVE" %}
+  </form>
+
+  {% endblock %}
+  <div class="py-5">
+    <div class="container">
+      <div class="py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center"> <i class="d-block fa fa-stop-circle mb-3 text-muted fa-3x"></i>
+              <p> <a href="https://goo.gl/maps/AUq7b9W7yYJ2" target="_blank"> Book Review Service <br>2022</a> </p>
+              <p> <a href="tel:+246 - 542 550 5462">Multicampus</a> </p>
+              <p class="mb-0"> <a href="mailto:info@pingendo.com">reading@kakao.com</a> </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 d-flex align-items-center justify-content-center my-3"> <a href="#">
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+              </a> </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center" style="">
+              <p class="mb-0">©22 차화영 &amp; 임수경</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

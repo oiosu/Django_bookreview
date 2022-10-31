@@ -5,6 +5,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/light-theme.css" id="theme-link" />
 
 <!DOCTYPE html>
 <html>
@@ -21,169 +22,98 @@
   <link rel="stylesheet" href="wireframe.css" type="text/css">
 </head>
 
+<!-- <style>
+  :root {
+  color-scheme: light dark; /* both supported */
+}
+</style> -->
+
+<script>
+        // 링크 색 바꾸기
+        function LinkSetColor(color){
+            var alist = document.querySelectorAll('a');
+            for(var i = 0; i < alist.length; i++)
+                alist[i].style.color = color;
+        }
+
+        // 바디 글자색 바꾸기
+        function BodySetColor(color){
+            document.querySelector('body').style.color = color;
+        }
+
+        // 바디 배경색 바꾸기
+        function BodySetBackgroundColor(color){
+            document.querySelector('body').style.backgroundColor = color;
+        }
+
+        // 주간, 야간모드
+        function day_night_handler(self) {
+            var target = document.querySelector('body');
+            if (self.value == 'day') {
+                BodySetBackgroundColor('RGB(26,36,54)');
+                BodySetColor('black');
+                LinkSetColor('powderblue')
+                self.value = 'night';
+            }
+            else {
+                BodySetBackgroundColor('white');
+                BodySetColor('black');
+                LinkSetColor('blue')
+                self.value = 'day';
+            }
+        }
+</script>
 <body>
+
   <nav class="navbar navbar-dark bg-primary">
     <div class="container d-flex justify-content-center"> <a class="navbar-brand" href="#">
         <i class="fa d-inline fa-lg fa-circle-o"></i>
         <b>Comfortable Books And Articles</b>
       </a> </div>
   </nav>
+  
+  
   <div class="py-4 text-center">
     <div class="container">
       <div class="row">
         <div class="col-12">
           <h1 class="display-3 text-capitalize">Reading Diary</h1>
+          
           <p class="lead text-muted">What book did you read today?</p>
           <button class="btn" type="button">
             <a class=" btn btn-warning" href="{% url 'articles:create' %}" style="font-weight:bold">Writing</a></button>
+            <br><input type="button" value="day" onclick="day_night_handler(this)">
+            {% comment %} 기존에 bg-light라고 지정을 했기 때문에 dark모드를 해도 바뀌지 않았음 {% endcomment %}
         </div>
       </div>
     </div>
   </div>
-  <div class="py-4 bg-light">
+
+<!-- 글작성하면 보이는 곳 -->
+  <div class="py-4 ">
     <div class="container">
       <div class="row">
+        {% for article in articles %}
         <div class="col-md-4 p-3">
           <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+            {% if article.image %}
+              <img class="card-img-top" src="{{ article.image.url }}">
+            {% else %}
+             <img src="https://dummyimage.com/1200x960/000000/c4c4c4" class="card-img-top">
+            {% endif %}
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="text-muted"><a href="{% url 'accounts:detail' article.user.pk %}">작성자 {{ article.user.username }}</a></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
+                    <a href="{% url 'articles:detail' article.pk %}" class="btn btn-outline-primary my-3">리뷰 보기</a>
+                </div> <small class="text-muted">{{ article.updated_at|date:"y-m-d D" }}</small>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-4 bg-light" >
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-4 bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 p-3">
-          <div class="card box-shadow">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div> <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        {% endfor %}
+
   <div class="py-4">
     <div class="container">
       <div class="row">
@@ -348,6 +278,11 @@
     </div>
   </div>
   
+
+
+  <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

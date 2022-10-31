@@ -1,29 +1,67 @@
-{% extends 'home.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
 
-{% block content %} 
-<h1>{{ article.title }}</h1>
-<p>{{ article.pk }}번 게시글 | <a href="{% url 'accounts:detail' article.user.pk %}">{{ article.user.username }}</a></p>
-<p>{{ article.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ article.updated_at|date:"y-m-d D" }}</p>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-<span>
-  {% if request.user.is_authenticated %}
-    <a class="like-heart" href="{% url 'articles:like' article.pk %}">
-    {% if request.user in article.like_users.all %}
-      <i class="bi bi-heart-fill"></i>
-    {% else %}
-      <i class="bi bi-heart"></i>
-    {% endif %}</a>{{ article.like_users.count }}</span>
-  {% endif %}
+<!DOCTYPE html>
+<html>
 
-{% if request.user == article.user %}
-<p>
-  <a href="{% url 'articles:update' article.pk %}">수정하기</a>
-</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>REVIEW</title>
+  <meta name="author" content="Pingendo">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="wireframe.css" type="text/css">
+</head>
+
+<!-- nav -->
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container d-flex justify-content-center"> <a class="navbar-brand" href="#">
+      <i class="fa d-inline fa-lg fa-circle-o"></i>
+      <b>Comfortable Books And Articles</b>
+    </a> </div>
+</nav>
+
+<!-- 글 detail -->
+<div class="container">
+  <div class="m-2">
+  {% block content %} 
+  <h1 class="d-flex m-4 mb-0">{{ article.title }}</h1>
+  {% if request.user == article.user %}
+  <p>
+    <button type="button" class="btn btn-warning">
+      <a class="m-4 " style="color: #000;" href="{% url 'articles:update' article.pk %}">수정하기</a>
+    </button>
+  </p>
 {% endif %}
+  <hr>
+  <p class="m-1">{{ article.pk }}번 게시글 | <a href="{% url 'accounts:detail' article.user.pk %}">{{ article.user.username }}</a></p>
+  </div>
+<div class="row m-1">
+  <div class="row"><p>{{ article.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ article.updated_at|date:"y-m-d D" }}</p>
+    <span>
+      {% if request.user.is_authenticated %}
+        <a class="like-heart" href="{% url 'articles:like' article.pk %}">
+        {% if request.user in article.like_users.all %}
+          <i class="bi bi-heart-fill"></i>
+        {% else %}
+          <i class="bi bi-heart"></i>
+        {% endif %}</a>{{ article.like_users.count }}</span>
+      {% endif %}
+
+  </div>
+</div>
+
 <hr>
-<p>{{ article.content }} </p>
+<div class="text-center">
+  <p>{{ article.content }} </p>
 {% if article.image %}
   <img src="{{ article.image.url }}" alt="{{ article.image }}" width="400" height="300">
 {% endif %}
@@ -33,17 +71,67 @@
 <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
   {% csrf_token %}
   {% bootstrap_form comment_form layout='inline'%}
-  {% bootstrap_button button_type="submit" content="OK" %}
+  <br>
+  {% bootstrap_button style='float:right' button_type="submit" content="OK" %}
 </form>
 {% endif %}
 <hr>
+</div>
+
 
 {% for comment in comments %}
   <p> {{ comment.user.username }} | {{ comment.content }}</p>
   <hr>    
 {% empty %}
-  <p>댓글이 없어요 ㅠ_ㅠ</p>
+  <p>댓글이 없어요😥</p>
 {% endfor %}
+
+<!-- <div class="">
+  <footer>
+    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/0a0133116900061.622c5ddbe76b7.png" alt="">
+  </footer>
+</div> -->
 
 
 {% endblock %}
+
+
+<div class="py-5">
+  <div class="container">
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center"> <i class="d-block fa fa-stop-circle mb-3 text-muted fa-3x"></i>
+            <p> <a href="https://goo.gl/maps/AUq7b9W7yYJ2" target="_blank"> Book Review Service <br>2022</a> </p>
+            <p> <a href="tel:+246 - 542 550 5462">Multicampus</a> </p>
+            <p class="mb-0"> <a href="mailto:info@pingendo.com">reading@kakao.com</a> </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 d-flex align-items-center justify-content-center my-3"> <a href="#">
+              <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
+            </a> <a href="#">
+              <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+            </a> <a href="#">
+              <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
+            </a> <a href="#">
+              <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
+            </a> <a href="#">
+              <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
+            </a> <a href="#">
+              <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+            </a> </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center" style="">
+            <p class="mb-0">©22 차화영 &amp; 임수경</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+

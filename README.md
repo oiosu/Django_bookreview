@@ -52,7 +52,14 @@ path("accounts/", include("accounts.urls")),
 
 ---
 
-✔ 다크 모드 
+### ✔ 다크 모드 기능 구현
+
+![2022-10-31 23;32;43](https://user-images.githubusercontent.com/99783474/199033212-1bfd5d36-0c77-40a7-921d-1506f352bf4d.gif)
+
+---
+
+### ✔메인 페이지 
+
 
 
 

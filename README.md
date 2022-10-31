@@ -58,7 +58,26 @@ path("accounts/", include("accounts.urls")),
 
 ---
 
-### ✔메인 페이지 
+### ✔ 메인 페이지 
+![2022-10-31 23;35;30](https://user-images.githubusercontent.com/99783474/199033565-81abe824-acbf-4881-bf49-2753c31ab461.gif)
+
+---
+
+### ✔ 로그인 & 회원 가입 
+
+![2022-10-31 23;37;48](https://user-images.githubusercontent.com/99783474/199034109-88ddb5ba-6930-4fe7-83eb-cd879d5f7370.gif)
+
+![image](https://user-images.githubusercontent.com/99783474/199033636-32a0e0e9-f129-4aa4-ad21-a53fb848e475.png)
+
+---
+
+### ✔ 프로필
+![image](https://user-images.githubusercontent.com/99783474/199034711-73fe2a5b-4b88-42df-85eb-2bb6213a957a.png)
+
+---
+
+### ✔ 글 목록 페이지 
+![image](https://user-images.githubusercontent.com/99783474/199034945-e7195d14-0229-4257-b4b1-7b0a4285681d.png)
 
 
 

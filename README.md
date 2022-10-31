@@ -87,7 +87,8 @@ path("accounts/", include("accounts.urls")),
 <a href="https://github.com/oiosu/Django_bookreview/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=oiosu/Django_bookreview" />
 </a>
-👩 차화영 회고록 
+
+**👩 차화영 회고록**
 > 지금까지 배운 CRUD의 과정에 회원관리, 좋아요 및 팔로우 기능을 추가하여 진행했는데, 아직 model 간의 관계를 완벽히 이해하지 못했지만 프로젝트를 하면서 조금 정리가 되었다.  코드 단 몇 글자, 몇 줄로 생기는 오류를 함께 해결하는 것이 걸어왔던 길을 되돌아 가는 것이기에 참 소중한 경험을 했다고 생각한다. 구현하면 할수록 욕심이 생기고, 화면 구성과 꾸미는 것을 잘하는 팀원 덕분에 더 열심히 할 수 있었다
 
 
